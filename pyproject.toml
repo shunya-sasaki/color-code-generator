@@ -1,0 +1,28 @@
+[build-system]
+requires = ['setuptools', 'setuptools_scm', 'wheel']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name="ccg"
+dependencies = []
+dynamic = ['version']
+
+[tool.setuptools_scm]
+write_to = "src/ccg/_version.py"
+
+[tool.setuptools.dynamic]
+version = {attr="ccg._version.version"}
+
+[tool.isort]
+force_single_line = true
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 79
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = ["-v", "-x", "--cov=ccg", "--cov-report=term-missing"]
+testpaths = ["tests"]
