@@ -16,22 +16,22 @@ DARK_BLUE_GRAY1 = (86, 119, 131)
 DARK_BLUE_GRAY2 = (60, 93, 105)
 DARK_BLUE_GRAY3 = (34, 63, 75)
 
-RGB_COLORS = [
-    PRIMARY_GRAY,
-    ACCENT,
-    WHITE,
-    BLACK,
-    DARK_YELLOW,
-    LIGHT_YELLOW,
-    DARK_BLUE,
-    MIDDLE_BLUE,
-    LIGHT_BLUE,
-    DARK_GREEN,
-    LIGHT_GREEN,
-    DARK_PURPLE,
-    LIGHT_PURPLE,
-    GRAY,
-    DARK_BLUE_GRAY1,
-    DARK_BLUE_GRAY2,
-    DARK_BLUE_GRAY3,
-]
+RGB_COLORS = {
+    "primary-gray": PRIMARY_GRAY,
+    "accent": ACCENT,
+    "white": WHITE,
+    "black": BLACK,
+    "dark-yellow": DARK_YELLOW,
+    "light-yellow": LIGHT_YELLOW,
+    "dark-blue": DARK_BLUE,
+    "middle-blue": MIDDLE_BLUE,
+    "light-blue": LIGHT_BLUE,
+    "dark-green": DARK_GREEN,
+    "light-green": LIGHT_GREEN,
+    "dark-purple": DARK_PURPLE,
+    "light-purple": LIGHT_PURPLE,
+    "gray": GRAY,
+    "dark-blue-gray1": DARK_BLUE_GRAY1,
+    "dark-blue-gray2": DARK_BLUE_GRAY2,
+    "dark-blue-gray3": DARK_BLUE_GRAY3,
+}

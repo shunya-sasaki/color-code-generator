@@ -5,7 +5,10 @@ from ccg.rgbcolor import RGB_COLORS
 class TestRgb2Hex:
 
     def test_rgb2hex(self):
-        for rgb, hex_target in zip(RGB_COLORS, HEX_COLORS):
-            r, g, b = rgb
+        for (rgb_name, rgb_values), (hex_name, hex_value) in zip(
+            RGB_COLORS.items(), HEX_COLORS.items()
+        ):
+            assert rgb_name == hex_name
+            r, g, b = rgb_values
             hex_code = f"#{r:02x}{g:02x}{b:02x}"
-            assert rgb.rgb2hex() == hex_code
+            assert hex_code == hex_value
