@@ -1,3 +1,6 @@
+"""In this module, we define a dictionary HEX_COLORS to store hex colors.
+"""
+
 PRIMARY_GRAY = "#82a0aa"
 ACCENT = "#e31f26"
 WHITE = "#ffffff"
