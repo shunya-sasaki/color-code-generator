@@ -3,5 +3,6 @@
 from ccg import gradient
 from ccg import hexcolor
 from ccg import rgbcolor
+from ccg import dummy
 
-__all__ = ["gradient", "hexcolor", "rgbcolor"]
+__all__ = ["gradient", "hexcolor", "rgbcolor", "dummy"]
