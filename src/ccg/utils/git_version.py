@@ -70,9 +70,13 @@ class GitVersion:
             out = cls._execute(["git", "describe", "--tags", "--dirty"])
             describes = out.split("-")
             semantic_version = re.sub(r"^v", "", describes[0])
-            commit_count = int(describes[1])
-            commit_hash = re.sub(r"^g", "", describes[2])
-            is_dirty = describes[-1] == "dirty"
+            if len(describes) > 1:
+                commit_count = int(describes[1])
+                commit_hash = re.sub(r"^g", "", describes[2])
+                is_dirty = describes[-1] == "dirty"
+            else:
+                commit_count = 0
+                is_dirty = False
             major, minor, patch = semantic_version.split(".")
             if commit_count == 0 and not is_dirty:
                 version = f"{major}.{minor}.{patch}"
