@@ -76,6 +76,7 @@ class GitVersion:
                 is_dirty = describes[-1] == "dirty"
             else:
                 commit_count = 0
+                commit_hash = ""
                 is_dirty = False
             major, minor, patch = semantic_version.split(".")
             if commit_count == 0 and not is_dirty:
