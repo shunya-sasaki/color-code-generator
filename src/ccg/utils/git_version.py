@@ -89,6 +89,104 @@ class GitVersion:
         return version
 
     @classmethod
+    def current_branch(cls) -> str:
+        """Return the current git branch."""
+        out = cls._execute(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+        return out
+
+    @classmethod
+    def last_commit_message(cls) -> str:
+        """Return the last commit message."""
+        out = cls._execute(["git", "log", "-1", "--pretty=%B"])
+        return out
+
+    @classmethod
+    def delete_tag(cls, tag: str) -> None:
+        """Delete a git tag."""
+        cls._execute(["git", "tag", "-d", tag])
+
+    @classmethod
+    def add_tag(cls, tag: str, message: str = "") -> None:
+        """Add a git tag."""
+        if message:
+            args = ["git", "tag", "-a", tag, "-m", message]
+        else:
+            args = ["git", "tag", tag]
+        cls._execute(args)
+
+    @classmethod
+    def add_file(cls, file_name: str) -> None:
+        """Add a file to git."""
+        cls._execute(["git", "add", file_name])
+
+    @classmethod
+    def push(cls, verify: bool = True) -> None:
+        """Push changes to git."""
+        if verify:
+            args = ["git", "push"]
+        else:
+            args = ["git", "push", "--no-verify"]
+        cls._execute(args)
+
+    @classmethod
+    def push_tags(cls) -> None:
+        """Push tags to git."""
+        cls._execute(["git", "push", "--tags"])
+
+    @classmethod
+    def commit(
+        cls, message: str, verify: bool = True, allow_empty: bool = False
+    ) -> None:
+        """Commit changes to git."""
+        if allow_empty:
+            args = ["git", "commit", "--allow-empty", "-m", message]
+        else:
+            args = ["git", "commit", "-m", message]
+        if not verify:
+            args.append("--no-verify")
+        cls._execute(args)
+
+    @classmethod
+    def release(cls) -> None:
+        """Release the current version."""
+        if current_branch := cls.current_branch() != "main":
+            raise RuntimeError(
+                f"Your current branch is '{current_branch}'. "
+                "Release can only be performed from the 'main' branch."
+            )
+        version = cls.version()
+        if version == "unknown":
+            raise RuntimeError("Cannot release: version is unknown.")
+        if "dev0" in version:
+            raise RuntimeError(
+                "Cannot release: version is a development version."
+            )
+        if "post" in version:
+            raise RuntimeError(
+                "Cannot release: version is a post-release version."
+            )
+        cls.delete_tag("v" + version)
+        cls.commit(f"Release v{version}", verify=False, allow_empty=True)
+        cls.add_tag("v" + version)
+        cls.push_tags()
+        cls.push(verify=False)
+
+    @classmethod
+    def build(cls) -> None:
+        """Build the package."""
+        if current_branch := cls.current_branch() != "main":
+            raise RuntimeError(
+                f"Your current branch is '{current_branch}'. "
+                "Release can only be performed from the 'main' branch."
+            )
+        last_commit_message = cls.last_commit_message()
+        if not last_commit_message.startswith("Release v"):
+            raise RuntimeError(
+                "Cannot build: repository is not in a release state."
+            )
+        cls._execute(["uv", "build"])
+
+    @classmethod
     def _version_from_metadata(cls) -> str:
         """Get the version from the package metadata."""
         package_name = cls.package_name()
