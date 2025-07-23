@@ -1,7 +1,4 @@
-"""This module, defines a class GradientColorGenerator.
-
-GradientColorGenerator is used to generate gradient colors.
-"""
+"""In this module, we define a class GradientColorGenerator."""
 
 from typing import Literal
 from typing import Tuple
@@ -9,7 +6,7 @@ from typing import Tuple
 from ccg.rgbcolor import RGB_COLORS
 
 
-class GradientColorGenerator:
+class DarkGradientColorGenerator:
     """Class to generate gradient colors.
 
     Methods:
@@ -33,17 +30,16 @@ class GradientColorGenerator:
                 Defaults to 1.0.
             return_type (Literal["rgb", "hex"], optional): return type.
                 Defaults to "rgb".
-
         Returns:
             Tuple[int, int, int] | str: gradient color.
         """
         r, g, b = RGB_COLORS[color_name]
-        delta_r = 255 - r
-        delta_g = 255 - g
-        delta_b = 255 - b
-        grad_r = int(r + delta_r * (1 - ratio))
-        grad_g = int(g + delta_g * (1 - ratio))
-        grad_b = int(b + delta_b * (1 - ratio))
+        delta_r = r
+        delta_g = g
+        delta_b = b
+        grad_r = int(r - delta_r * ratio)
+        grad_g = int(g - delta_g * ratio)
+        grad_b = int(b - delta_b * ratio)
         match return_type:
             case "rgb":
                 return grad_r, grad_g, grad_b
@@ -53,18 +49,18 @@ class GradientColorGenerator:
                 raise ValueError("return_type must be either 'rgb' or 'hex'.")
 
     def grad_colors(self, return_type: Literal["rgb", "hex"] = "rgb"):
-        """Generate gradient colors for all color names.
+        """generate gradient colors for all color names
 
         Args:
             return_type (Literal["rgb", "hex"], optional): return type.
                 Defaults to "rgb".
         """
         dict_colors: dict[str, str | tuple[int, int, int]] = {}
-        ratios = [0.2, 0.4, 0.6, 0.8, 1.0]
+        ratios = [0.0, 0.2, 0.4, 0.6, 0.8]
         n_ratio = len(ratios)
         for color_name in RGB_COLORS.keys():
             for i_ratio, ratio in enumerate(ratios):
-                dict_colors[f"{color_name}-{int(ratio * 100):02d}"] = (
+                dict_colors[f"{color_name}-{100 + int(ratio * 100):02d}"] = (
                     self.grad_color(
                         color_name=color_name,
                         ratio=ratio,
@@ -72,5 +68,5 @@ class GradientColorGenerator:
                     )
                 )
                 if i_ratio == n_ratio - 1:
-                    dict_colors[color_name] = dict_colors[f"{color_name}-100"]
+                    pass
         return dict_colors

@@ -1,8 +1,8 @@
-"""In this module, we define a dictionary HEX_COLORS to store hex colors.
-"""
+"""In this module, we define a dictionary HEX_COLORS to store hex colors."""
 
 PRIMARY_GRAY = "#82a0aa"
-ACCENT = "#e31f26"
+MAIN_RED = "#e31f26"
+ACCENT = "#2b72b3"
 WHITE = "#ffffff"
 BLACK = "#000000"
 DARK_YELLOW = "#dc6914"
@@ -21,6 +21,7 @@ DARK_BLUE_GRAY3 = "#223f4b"
 
 HEX_COLORS = {
     "primary-gray": PRIMARY_GRAY,
+    "main-red": MAIN_RED,
     "accent": ACCENT,
     "white": WHITE,
     "black": BLACK,

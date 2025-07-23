@@ -1,8 +1,8 @@
-"""In this module, we define a dictionary RGB_COLORS to store RGB colors.
-"""
+"""In this module, we define a dictionary RGB_COLORS to store RGB colors."""
 
 PRIMARY_GRAY = (130, 160, 170)
-ACCENT = (227, 31, 38)
+MAIN_RED = (227, 31, 38)
+ACCENT = (43, 114, 179)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 DARK_YELLOW = (220, 105, 20)
@@ -21,6 +21,7 @@ DARK_BLUE_GRAY3 = (34, 63, 75)
 
 RGB_COLORS = {
     "primary-gray": PRIMARY_GRAY,
+    "main-red": MAIN_RED,
     "accent": ACCENT,
     "white": WHITE,
     "black": BLACK,

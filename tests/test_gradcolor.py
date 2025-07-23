@@ -42,4 +42,5 @@ class TestGradientColorGenerator:
     def test_grad_color_value_error(self):
         with pytest.raises(ValueError):
             generator = GradientColorGenerator()
-            generator.grad_color("primary-gray", return_type="invalid")
+            generator.grad_color("primary-gray", return_type="rgb")
+            
