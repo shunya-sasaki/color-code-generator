@@ -9,7 +9,8 @@ from typing import Literal
 from pydantic import BaseModel
 from pydantic import ConfigDict
 
-from ccg.utils.format_converter import FormatConverter
+from ccg.models import Color
+from ccg.utils import FormatConverter
 
 
 class AppConfig(BaseModel):
@@ -25,9 +26,8 @@ class AppConfig(BaseModel):
     model_config = ConfigDict(
         alias_generator=FormatConverter.snake_to_camel, populate_by_name=True
     )
+    colors: list[Color]
 
-    host: str = "localhost"
-    port: int = 8000
     log_level: Literal["debug", "info", "warning", "error"] = "info"
 
     @classmethod
