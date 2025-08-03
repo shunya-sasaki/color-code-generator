@@ -9,7 +9,7 @@ from typing import Literal
 from pydantic import BaseModel
 from pydantic import ConfigDict
 
-from ccg.models import Color
+from ccg.models.color import Color
 from ccg.utils import FormatConverter
 
 
