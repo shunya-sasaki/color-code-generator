@@ -1,14 +1,9 @@
-"""Color code generator package"""
+"""Color code generator package."""
 
 from ccg import gradient
-from ccg import hexcolor
-from ccg import rgbcolor
 from ccg.gradient import GradientColorGenerator
 
 __all__ = [
     "gradient",
-    "hexcolor",
-    "rgbcolor",
-    "DarkGradientColorGenerator",
     "GradientColorGenerator",
 ]
