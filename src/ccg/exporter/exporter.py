@@ -9,8 +9,9 @@ from ccg.models import Color
 class Exporter(ABC):
     """Abstract class to export color data to a file."""
 
+    @classmethod
     @abstractmethod
-    def export_to_file(self, colors: list[Color], file_name: str) -> None:
+    def export_to_file(cls, colors: list[Color], file_name: str) -> None:
         """Export color data to a file.
 
         Args:
