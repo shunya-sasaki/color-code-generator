@@ -1,12 +1,13 @@
 [project]
 name = "ccg"
-description = ""
+description = "Color code generator for CSS and VS Code snippets."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 dependencies = ["pydantic"]
 dynamic = ["version"]
 
 [project.scripts]
+ccg-create-colors = "ccg.cli:run"
 
 [build-system]
 requires = ["hatchling", "uv-dynamic-versioning"]
